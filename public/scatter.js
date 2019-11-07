@@ -39,8 +39,8 @@ var Ozone = {
     oneyear =  year;
     dataset = resdata;
     
-    console.log(dataset[0].Ozone)
-    console.log(dataset)
+    // console.log(dataset[0].Ozone)
+    // console.log(dataset)
     if (dataset[0].Ozone.altitudes.length > 0){
       data[0].x = dataset[0].Ozone.altitudes
       data[0].y = dataset[0].Ozone.concentrations
@@ -75,9 +75,9 @@ var Ozone = {
     
 
 
-    console.log("From notify: "+ lat);
-    console.log("From notify: "+ lng);
-    console.log("From notify: "+ oneyear);
+    // console.log("From notify: "+ lat);
+    // console.log("From notify: "+ lng);
+    // console.log("From notify: "+ oneyear);
     Plotly.purge('myDiv');
     layout.title.text = 'Concentration vs Altitude, ' + oneyear + ', ' + lat + '° N' + ', ' + (-1 * lng) + '° W <br>'+words;
 
