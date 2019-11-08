@@ -33,18 +33,22 @@ app.get('/whole/data', function (req, res) {
    * ]]}
    * 
    */
-  const qYear = parseInt(req.query.year);
-  const qResult = jsonQuery(`gasData[*orbitYear=${qYear}]`,{data: data}).value;
 
-  let resObj = {"addressPoints":[]};
+   //TODO
+   // need to be more quick. manuplating array takes 1200ms. should be less than 600ms. 
+  const qYear = parseInt(req.query.year);
   
+  const qResult = jsonQuery(`gasData[*orbitYear=${qYear}]`,{data: data}).value;
+  
+  let resObj = {"addressPoints":[]};
+  //console.time("arrayTime");
   if (qResult.length > 1){
     qResult.forEach((obj) =>{
       if(resObj.addressPoints.length === 0){
         let tmpArr =[]
         tmpArr.push(parseInt(obj.latitude))
         tmpArr.push(parseInt(obj.longitude))
-        tmpArr.push(parseFloat(obj.vAvg))
+        tmpArr.push(parseFloat(obj.vMax))
         tmpArr.push(parseInt(obj.gasID))
         tmpArr.push(parseInt(obj.orbitYear))
         tmpArr.push(parseInt(obj.orbitMonth))
@@ -53,21 +57,23 @@ app.get('/whole/data', function (req, res) {
 
 
       }else{
+        // For same location, different altitude.
         let push_flag = true;
 
-        resObj.addressPoints.forEach(e => {
-          if(e[0] === parseInt(obj.latitude) && e[1] === parseInt(obj.longitude) && e[3] === parseInt(obj.gasID) && e[4] === parseInt(obj.orbitYear) && e[5] === parseInt(obj.orbitMonth)){
-            e[2] += parseFloat(obj.vAvg);
-            e[6] += 1;
+        for(let x=0;x < resObj.addressPoints.length;x++){
+          if(resObj.addressPoints[x][0] === parseInt(obj.latitude) && resObj.addressPoints[x][1] === parseInt(obj.longitude) && resObj.addressPoints[x][3] === parseInt(obj.gasID) && resObj.addressPoints[x][4] === parseInt(obj.orbitYear) && resObj.addressPoints[x][5] === parseInt(obj.orbitMonth)){
+            resObj.addressPoints[x][2] += parseFloat(obj.vMax);
+            resObj.addressPoints[x][6] += 1;
             push_flag = false;
+            break;
           } 
-        })
 
+        }
         if(push_flag){
           let tmpArr =[]
           tmpArr.push(parseInt(obj.latitude))
           tmpArr.push(parseInt(obj.longitude))
-          tmpArr.push(parseFloat(obj.vAvg))
+          tmpArr.push(parseFloat(obj.vMax))
           tmpArr.push(parseInt(obj.gasID))
           tmpArr.push(parseInt(obj.orbitYear))
           tmpArr.push(parseInt(obj.orbitMonth))
@@ -76,10 +82,12 @@ app.get('/whole/data', function (req, res) {
 
 
       }
+      
         
 
         }
   })
+  //console.timeEnd("arrayTime");
 }
 
   resObj.addressPoints.forEach(e =>{

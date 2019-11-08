@@ -163,7 +163,7 @@ function playMap() {
         console.log("currentYEAR: " +currentYear);
         
         callMap()
-    }, 5000);
+    }, 3000);
 
 }
 
