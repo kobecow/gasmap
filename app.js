@@ -35,13 +35,17 @@ app.get('/whole/data', function (req, res) {
    */
 
    //TODO
+   // 1486.741ms without break
+   // 1333.965ms with break
    // need to be more quick. manuplating array takes 1200ms. should be less than 600ms. 
+   // just idea use json key-value.
   const qYear = parseInt(req.query.year);
   
   const qResult = jsonQuery(`gasData[*orbitYear=${qYear}]`,{data: data}).value;
   
   let resObj = {"addressPoints":[]};
-  //console.time("arrayTime");
+  // console.time("arrayTime");
+  // let cont_loop = 0
   if (qResult.length > 1){
     qResult.forEach((obj) =>{
       if(resObj.addressPoints.length === 0){
@@ -61,6 +65,7 @@ app.get('/whole/data', function (req, res) {
         let push_flag = true;
 
         for(let x=0;x < resObj.addressPoints.length;x++){
+          // cont_loop += 1
           if(resObj.addressPoints[x][0] === parseInt(obj.latitude) && resObj.addressPoints[x][1] === parseInt(obj.longitude) && resObj.addressPoints[x][3] === parseInt(obj.gasID) && resObj.addressPoints[x][4] === parseInt(obj.orbitYear) && resObj.addressPoints[x][5] === parseInt(obj.orbitMonth)){
             resObj.addressPoints[x][2] += parseFloat(obj.vMax);
             resObj.addressPoints[x][6] += 1;
@@ -87,7 +92,8 @@ app.get('/whole/data', function (req, res) {
 
         }
   })
-  //console.timeEnd("arrayTime");
+  // console.log(cont_loop)
+  // console.timeEnd("arrayTime");
 }
 
   resObj.addressPoints.forEach(e =>{
