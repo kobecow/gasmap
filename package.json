@@ -6,6 +6,7 @@
   "directories": {
     "test": "test"
   },
+  "eslintConfig": ".eslintrc.json",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
@@ -35,6 +36,7 @@
   },
   "devDependencies": {
     "csv": "^0.3.7",
+    "eslint-config-google": "^0.14.0",
     "leaflet": "^1.5.1"
   }
 }
