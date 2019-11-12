@@ -4,3 +4,6 @@ But due to size of the file, it must stay Backend. File size is over 40MB.
 Fortunately, App doesn't need whole file at once. It menas App doesn't need 15 years of gases at once.
 
 So I will change code to request to get data of each year.
+
+### getData as changing year
+HTTP Req to get data of year. And Then use it. I will make time bar which has resolution of month.
