@@ -11,12 +11,12 @@ app.use(express.static('dist'));
 
 
 // This responds with "Hello World" on the homepage
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
   console.log('Got a GET request for the homepage');
   res.send('Hello GET');
 });
 
-app.get('/whole/data', function(req, res) {
+app.get('/whole/data', function (req, res) {
   /**
    * input Int req.year
    *
@@ -39,15 +39,15 @@ app.get('/whole/data', function(req, res) {
   // just idea use json key-value.
   const qYear = parseInt(req.query.year);
 
-  const qResult = jsonQuery(`gasData[*orbitYear=${qYear}]`, {data: data}).value;
+  const qResult = jsonQuery(`gasData[*orbitYear=${qYear}]`, { data: data }).value;
 
-  const resObj = {'addressPoints': []};
+  const resObj = { 'addressPoints': [] };
   // console.time("arrayTime");
   // let cont_loop = 0
   if (qResult.length > 1) {
-    qResult.forEach((obj) =>{
+    qResult.forEach((obj) => {
       if (resObj.addressPoints.length === 0) {
-        const tmpArr =[];
+        const tmpArr = [];
         tmpArr.push(parseInt(obj.latitude));
         tmpArr.push(parseInt(obj.longitude));
         tmpArr.push(parseFloat(obj.vMax));
@@ -60,13 +60,13 @@ app.get('/whole/data', function(req, res) {
         // For same location, different altitude.
         let pushFlag = true;
 
-        for (let x=0; x < resObj.addressPoints.length; x++) {
+        for (let x = 0; x < resObj.addressPoints.length; x++) {
           // cont_loop += 1
           if (resObj.addressPoints[x][0] === parseInt(obj.latitude) &&
-          resObj.addressPoints[x][1] === parseInt(obj.longitude) &&
-          resObj.addressPoints[x][3] === parseInt(obj.gasID) &&
-          resObj.addressPoints[x][4] === parseInt(obj.orbitYear) &&
-          resObj.addressPoints[x][5] === parseInt(obj.orbitMonth)) {
+            resObj.addressPoints[x][1] === parseInt(obj.longitude) &&
+            resObj.addressPoints[x][3] === parseInt(obj.gasID) &&
+            resObj.addressPoints[x][4] === parseInt(obj.orbitYear) &&
+            resObj.addressPoints[x][5] === parseInt(obj.orbitMonth)) {
             resObj.addressPoints[x][2] += parseFloat(obj.vMax);
             resObj.addressPoints[x][6] += 1;
             pushFlag = false;
@@ -74,7 +74,7 @@ app.get('/whole/data', function(req, res) {
           }
         }
         if (pushFlag) {
-          const tmpArr =[];
+          const tmpArr = [];
           tmpArr.push(parseInt(obj.latitude));
           tmpArr.push(parseInt(obj.longitude));
           tmpArr.push(parseFloat(obj.vMax));
@@ -86,12 +86,12 @@ app.get('/whole/data', function(req, res) {
         }
       }
     });
-  // console.log(cont_loop)
-  // console.timeEnd("arrayTime");
+    // console.log(cont_loop)
+    // console.timeEnd("arrayTime");
   }
 
-  resObj.addressPoints.forEach((e) =>{
-    e[2] = e[2]/parseFloat(e[6]);
+  resObj.addressPoints.forEach((e) => {
+    e[2] = e[2] / parseFloat(e[6]);
     e.pop();
   });
 
@@ -101,17 +101,17 @@ app.get('/whole/data', function(req, res) {
 });
 
 
-app.get('/data', function(req, res) {
+app.get('/data', function (req, res) {
   const qLat = parseInt(req.query.lat);
   const qLng = parseInt(req.query.lng);
   const qYear = parseInt(req.query.year);
 
-  const incr = 2;
-  const qLathi = qLat +incr;
-  const qLatlo = qLat -incr;
+  const incr = 0;
+  const qLathi = qLat + incr;
+  const qLatlo = qLat - incr;
 
-  const qLnghi = qLng +incr;
-  const qLnglo = qLng -incr;
+  const qLnghi = qLng + incr;
+  const qLnglo = qLng - incr;
 
   // now do the json query
 
@@ -121,37 +121,58 @@ app.get('/data', function(req, res) {
                             &longitude>=${qLnglo}
                             &longitude<=${qLnghi}
                             &orbitYear=${qYear}]`,
-  {data: data}).value;
+    { data: data }).value;
 
 
   const RES = [];
   const resObj = {
     Methane: {
       altitudes: [],
-      concentrations: [],
+      concentrations: []
     },
     Ozone: {
       altitudes: [],
-      concentrations: [],
+      concentrations: []
     },
     CarbonDioxide: {
       altitudes: [],
-      concentrations: [],
+      concentrations: []
     },
+    Dichlorodifluoromethane: {
+      altitudes: [],
+      concentrations: []
+    },
+    Trichlorofluoromethane: {
+      altitudes: [],
+      concentrations: []
+    },
+    Nitrous_oxide: {
+      altitudes: [],
+      concentrations: []
+    }
   };
 
 
   if (qResult.length > 1) {
     qResult.forEach((element) => {
-      if (element.gasID ==='3') {
+      if (element.gasID === '3') {
         resObj.Methane.altitudes.push(element.altitude);
         resObj.Methane.concentrations.push(element.vAvg);
-      } else if (element.gasID ==='4') {
+      } else if (element.gasID === '4') {
         resObj.CarbonDioxide.altitudes.push(element.altitude);
         resObj.CarbonDioxide.concentrations.push(element.vAvg);
-      } else if (element.gasID ==='6') {
+      } else if (element.gasID === '6') {
         resObj.Ozone.altitudes.push(element.altitude);
         resObj.Ozone.concentrations.push(element.vAvg);
+      } else if (element.gasID === '1') {
+        resObj.Dichlorodifluoromethane.altitudes.push(element.altitude);
+        resObj.Dichlorodifluoromethane.concentrations.push(element.vAvg);
+      } else if (element.gasID === '2') {
+        resObj.Trichlorofluoromethane.altitudes.push(element.altitude);
+        resObj.Trichlorofluoromethane.concentrations.push(element.vAvg);
+      } else if (element.gasID === '5') {
+        resObj.Nitrous_oxide.altitudes.push(element.altitude);
+        resObj.Nitrous_oxide.concentrations.push(element.vAvg);
       }
     });
   }
@@ -169,24 +190,24 @@ const csvToJSON = () => {
   const csvFilePath = './gas_summary.csv';
   const csv = require('csvtojson');
   csv()
-      .fromFile(csvFilePath)
-      .then((jsonObj)=>{
+    .fromFile(csvFilePath)
+    .then((jsonObj) => {
       // console.log(jsonObj)
-        jsonObj.forEach((jObj) =>{
-          jObj.longitude = parseInt(jObj.longitude);
-        });
-        // console.log(jsonObj)
-
-
-        data = {
-          gasData: jsonObj,
-        };
-
-        console.log('CSV data loaded complete!');
+      jsonObj.forEach((jObj) => {
+        jObj.longitude = parseInt(jObj.longitude);
       });
+      // console.log(jsonObj)
+
+
+      data = {
+        gasData: jsonObj,
+      };
+
+      console.log('CSV data loaded complete!');
+    });
 };
 
-const server = app.listen(3000, function() {
+const server = app.listen(3000, function () {
   const host = server.address().address;
   const port = server.address().port;
 
@@ -197,7 +218,7 @@ const server = app.listen(3000, function() {
 
 
 app.get('/healthcheck', (req, res) => {
-  res.json({status: "UP"});
-  });
+  res.json({ status: "UP" });
+});
 
 

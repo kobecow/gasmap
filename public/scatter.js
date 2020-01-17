@@ -93,6 +93,30 @@ function notify(latlng, year, resdata) {
     data[2].y = []
   }
 
+  if (dataset[0].Dichlorodifluoromethane.altitudes.length > 0) {
+    data[3].x = dataset[0].Dichlorodifluoromethane.altitudes
+    data[3].y = dataset[0].Dichlorodifluoromethane.concentrations
+  } else {
+    data[3].x = []
+    data[3].y = []
+  }
+
+  if (dataset[0].Trichlorofluoromethane.altitudes.length > 0) {
+    data[4].x = dataset[0].Trichlorofluoromethane.altitudes
+    data[4].y = dataset[0].Trichlorofluoromethane.concentrations
+  } else {
+    data[4].x = []
+    data[4].y = []
+  }
+
+  if (dataset[0].Nitrous_oxide.altitudes.length > 0) {
+    data[5].x = dataset[0].Nitrous_oxide.altitudes
+    data[5].y = dataset[0].Nitrous_oxide.concentrations
+  } else {
+    data[5].x = []
+    data[5].y = []
+  }
+
 
   words = ""
   if (data[0].x.length === 0) {
