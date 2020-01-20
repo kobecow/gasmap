@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/MaximFrumkin/WhooMap#readme",
   "dependencies": {
+    "actions-on-google": "^2.12.0",
     "cors": "^2.8.5",
     "csv-parse": "^4.6.5",
     "csv-query": "0.0.4",
