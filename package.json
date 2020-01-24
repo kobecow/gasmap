@@ -9,20 +9,19 @@
   "eslintConfig": ".eslintrc.json",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "npx nodemon app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MaximFrumkin/WhooMap.git"
+    "url": "git+https://github.com/kobecow/gasmap.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/MaximFrumkin/WhooMap/issues"
+    "url": "https://github.com/kobecow/gasmap/issues"
   },
-  "homepage": "https://github.com/MaximFrumkin/WhooMap#readme",
+  "homepage": "https://github.com/kobecow/gasmap#readme",
   "dependencies": {
-    "actions-on-google": "^2.12.0",
     "cors": "^2.8.5",
     "csv-parse": "^4.6.5",
     "csv-query": "0.0.4",
@@ -38,6 +37,7 @@
   "devDependencies": {
     "csv": "^0.3.7",
     "eslint-config-google": "^0.14.0",
-    "leaflet": "^1.5.1"
+    "leaflet": "^1.5.1",
+    "nodemon": "^2.0.2"
   }
 }

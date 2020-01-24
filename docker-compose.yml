@@ -1,0 +1,10 @@
+version: "3"
+services:
+  nod_dev_env:
+    build: .
+    container_name: gasmap
+    ports:
+      - 3333:3000
+    volumes:
+      - ./:/home/app
+    command: "npm run start"
