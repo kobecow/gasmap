@@ -30,14 +30,20 @@
         <div class="bo">
             <div id="map"></div>
             
-            
-            <div align="left" style="font-family:Calibri;font-size:24px; width:200px; border:1px solid #ddd;">
-                <button id="play" onclick="javascript:playMap();">Play ></button> <span id="year">2004</span>
-                <button id="stop" onclick="javascript:stopMap();">Stop ></button> </span>
+                        
+
+            <div class="slider-wrapper">
+                <div align="left" style="font-family:Calibri;font-size:24px; width:200px; border:1px solid #ddd;">
+                    <button id="play" onclick="javascript:playMap();">Play ></button> <span id="year">2004</span>
+                    <button id="stop" onclick="javascript:stopMap();">Stop ></button> </span>
+                </div>
+                <div id="year-slider-step" class="slider-step"></div>
             </div>
 
-            <div id="slider-step"></div>
-            <div id="slider-step-value"></div>
+            <div class="slider-wrapper">
+                <div id="month-slider-step" class="slider-step"></div>
+            </div>
+    
             <input type="radio" id="Ozone" name="gas" class="gas" value="6" checked onclick="javascript: callMap();">Ozone<br>
             <input type="radio" id="CH4" name="gas" class="gas" value="3" onclick="javascript: callMap();">Methane gas<br>
             <input type="radio" id="CO2" name="gas" class="gas" value="4" onclick="javascript: callMap();">Carbon Dioxide<br>

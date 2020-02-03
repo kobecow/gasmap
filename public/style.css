@@ -123,3 +123,16 @@ a {
     float: left;
     width: 50%;     
 }
+.slider-wrapper{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.slider-step{
+    position: absolute;
+    width: 75%;    
+    right: 0;
+}

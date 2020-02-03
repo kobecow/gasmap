@@ -240,45 +240,38 @@ function createMap(gas, year) {
 }
 
 jQuery(document).ready(function () {
+    slideMaker('month');
+    slideMaker('year');
+});
 
-    var stepSlider = document.getElementById('slider-step');
+const slideMaker = (duration) =>{
+    let StepSlider = document.getElementById(`${duration}-slider-step`);
+    if(duration === 'month'){
+        noUiSlider.create(StepSlider, {
+            start: [1],
+            step: 1,
+            range: {
+                'min': [1],
+                'max': [12]
+            },
+            pips: {mode: 'steps', density: 1}
+        });
+    }else if(duration === 'year'){
+        noUiSlider.create(StepSlider, {
+            start: [2004],
+            step: 1,
+            range: {
+                'min': [2004],
+                'max': [2019]
+            },
+            pips: {mode: 'steps', density: 1}
+        });
+    }
 
-    noUiSlider.create(stepSlider, {
-        start: [1],
-        step: 1,
-        range: {
-            'min': [1],
-            'max': [12]
-        },
-        pips: {mode: 'steps', density: 1}
-    });
-
-    stepSlider.querySelectorAll('.noUi-value');
-
-    function clickOnPip() {
-    var value = Number(this.getAttribute('data-value'));
-    stepSlider.noUiSlider.set(value);
-}
-    /*
-    var pips = pipsSlider.querySelectorAll('.noUi-value');
+    StepSlider.querySelectorAll('.noUi-value');
 
     function clickOnPip() {
         var value = Number(this.getAttribute('data-value'));
-        pipsSlider.noUiSlider.set(value);
+        StepSlider.noUiSlider.set(value);
     }
-
-    for (var i = 0; i < pips.length; i++) {
-
-        // For this example. Do this in CSS!
-        pips[i].style.cursor = 'pointer';
-        pips[i].addEventListener('click', clickOnPip);
-    }
-    */
-
-    var stepSliderValueElement = document.getElementById('slider-step-value');
-
-    stepSlider.noUiSlider.on('update', function (values, handle) {
-    stepSliderValueElement.innerHTML = values[handle];
-});
-
-});
+}
