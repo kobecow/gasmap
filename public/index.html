@@ -21,7 +21,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/8.5.1/nouislider.min.js"></script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
-    <script src="dist/myData.js"></script>
     <script src="public-javascript.js"></script>
     <link rel="stylesheet" href="style.css">
 
@@ -29,12 +28,6 @@
 <body>
     <div class="row">
         <div class="bo">
-            <div class="topnav">
-                <a class="active" href="#home">Home</a>
-                <a href="#news">News</a>
-                <a href="#contact">Contact</a>
-                <a href="#about">About</a>
-                </div>
             <div id="map"></div>
             
             
@@ -43,18 +36,7 @@
                 <button id="stop" onclick="javascript:stopMap();">Stop ></button> </span>
             </div>
 
-            <!-- <script src="../node_modules/simpleheat/simpleheat.js"></script>
-            <script src="../src/HeatLayer.js"></script> -->
-
-            <!--<script src="dist/leaflet-heat.js"></script>-->
-            
-            
-
-            <!--<div id="slider" style="top: 0px; right: 1px; margin: 10px 25px;"></div>
-            <div style="margin-right: auto; margin-left: auto; width: 90%; margin-bottom: 10px; text-align: center;">
-                <input type="number" min='1' max='2019' id="input-number-min">
-                <input type="number" min='2' max='35676000' id="input-number-max">
-            </div>-->
+            <div id="slider-pips"></div>
             <input type="radio" id="Ozone" name="gas" class="gas" value="6" checked onclick="javascript: callMap();">Ozone<br>
             <input type="radio" id="CH4" name="gas" class="gas" value="3" onclick="javascript: callMap();">Methane gas<br>
             <input type="radio" id="CO2" name="gas" class="gas" value="4" onclick="javascript: callMap();">Carbon Dioxide<br>
