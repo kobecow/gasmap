@@ -241,16 +241,25 @@ function createMap(gas, year) {
 
 jQuery(document).ready(function () {
 
-    var pipsSlider = document.getElementById('slider-pips');
+    var stepSlider = document.getElementById('slider-step');
 
-    noUiSlider.create(pipsSlider, {
+    noUiSlider.create(stepSlider, {
+        start: [1],
+        step: 1,
         range: {
-            min: 0,
-            max: 100
+            'min': [1],
+            'max': [12]
         },
-        start: [50],
-        pips: {mode: 'count', values: 5}
+        pips: {mode: 'steps', density: 1}
     });
+
+    stepSlider.querySelectorAll('.noUi-value');
+
+    function clickOnPip() {
+    var value = Number(this.getAttribute('data-value'));
+    stepSlider.noUiSlider.set(value);
+}
+    /*
     var pips = pipsSlider.querySelectorAll('.noUi-value');
 
     function clickOnPip() {
@@ -264,5 +273,12 @@ jQuery(document).ready(function () {
         pips[i].style.cursor = 'pointer';
         pips[i].addEventListener('click', clickOnPip);
     }
+    */
+
+    var stepSliderValueElement = document.getElementById('slider-step-value');
+
+    stepSlider.noUiSlider.on('update', function (values, handle) {
+    stepSliderValueElement.innerHTML = values[handle];
+});
 
 });
