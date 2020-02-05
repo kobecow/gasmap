@@ -21,6 +21,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/8.5.1/nouislider.min.js"></script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="public-javascript.js"></script>
     <link rel="stylesheet" href="style.css">
 
@@ -30,13 +31,12 @@
         <div class="bo">
             <div id="map"></div>
             
-                        
+            <div id="button-wrapper" style="font-family:Calibri;font-size:24px;">
+                <button type="button" id="play" class="btn btn-primary" onclick="javascript:playMap()";>Play</button>
+                <button type="button" id="stop" class="btn btn-warning" onclick="javascript:stopMap();">Stop</button>
+            </div>            
 
             <div class="slider-wrapper">
-                <div align="left" style="font-family:Calibri;font-size:24px; width:200px; border:1px solid #ddd;">
-                    <button id="play" onclick="javascript:playMap();">Play ></button> <span id="year">2004</span>
-                    <button id="stop" onclick="javascript:stopMap();">Stop ></button> </span>
-                </div>
                 <div id="year-slider-step" class="slider-step"></div>
             </div>
 

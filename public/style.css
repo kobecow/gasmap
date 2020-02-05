@@ -113,11 +113,13 @@ a {
     float:left;
     border:1px solid #ddd;
 }
+#button-wrapper{
+    position: relative;
+    width: 20%;
+    margin-left: 23px;
+}
 #play, #stop {
     padding: 5px 15px;
-    background-color: #1fa3de !important;
-    border-color: #1fa3de !important;
-    color:white;
 }
 .bo{
     float: left;
@@ -133,6 +135,6 @@ a {
 
 .slider-step{
     position: absolute;
-    width: 75%;    
+    width: 70%;    
     right: 0;
 }
