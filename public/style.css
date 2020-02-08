@@ -117,9 +117,17 @@ a {
     position: relative;
     width: 20%;
     margin-left: 23px;
+    top:33px;
+}
+
+#checkbox-wrapper{
+    position: relative;
+    top:75px;
+    left: 28px;
+    width:25%;
 }
 #play, #stop {
-    padding: 5px 15px;
+    padding: 6px 15px;
 }
 .bo{
     float: left;
@@ -127,14 +135,15 @@ a {
 }
 .slider-wrapper{
     position: relative;
-    width: 100%;
+    top: -30px;
+    left:200px;
+    width: 70%;
     height: 50px;
-    margin-top: 10px;
     margin-bottom: 30px;
 }
 
 .slider-step{
     position: absolute;
-    width: 70%;    
+    width: 100%;    
     right: 0;
 }
